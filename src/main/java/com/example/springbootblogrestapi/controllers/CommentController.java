@@ -3,6 +3,7 @@ package com.example.springbootblogrestapi.controllers;
 import com.example.springbootblogrestapi.payload.CommentDto;
 import com.example.springbootblogrestapi.services.CommentService;
 import com.example.springbootblogrestapi.utils.AppConstants;
+import org.apache.logging.log4j.util.PerformanceSensitive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +30,11 @@ public class CommentController {
         return commentService.getCommentsByPostId(postId);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<PostDto> getPostById(@PathVariable Long id){
-//        return ResponseEntity.ok(postService.getPostById(id));
-//    }
+    @GetMapping("/posts/{postId}/comments/{id}")
+    public ResponseEntity<CommentDto> getCommentById(@PathVariable Long postId, @PathVariable(value = "id") Long commentId){
+        CommentDto commentDto = commentService.getCommentById(postId, commentId);
+        return new ResponseEntity<>(commentDto, HttpStatus.OK);
+    }
 //
 //    @PutMapping("/{id}")
 //    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Long id){
