@@ -1,2 +1,11 @@
-package com.example.springbootblogrestapi.payload;public class PostDto {
+package com.example.springbootblogrestapi.payload;
+
+import lombok.Data;
+
+@Data
+public class PostDto {
+    private Long id;
+    private String title;
+    private String description;
+    private String content;
 }
