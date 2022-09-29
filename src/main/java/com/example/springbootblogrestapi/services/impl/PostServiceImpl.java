@@ -10,18 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
-    PostRepository postRepository;
+    private PostRepository postRepository;
 
     @Override
     public PostDto createPost(PostDto postDto) {
 
+//        System.out.println(postDto);
         // convert DTO to entity
         Post post = new Post();
-        post.setTitle(post.getTitle());
+        post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setContent(postDto.getContent());
 
         Post newPost = postRepository.save(post);
+//        System.out.println(newPost);
 
         // convert entity to DTO
         PostDto postResponse = new PostDto();
@@ -29,6 +31,7 @@ public class PostServiceImpl implements PostService {
         postResponse.setTitle(newPost.getTitle());
         postResponse.setDescription(newPost.getDescription());
         postResponse.setContent(newPost.getContent());
+//        System.out.println(postResponse);
 
         return postResponse;
     }
