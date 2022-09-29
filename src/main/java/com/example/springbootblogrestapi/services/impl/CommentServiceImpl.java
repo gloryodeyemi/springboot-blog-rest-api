@@ -63,6 +63,14 @@ public class CommentServiceImpl implements CommentService {
         return mapToDto(updatedComment);
     }
 
+    @Override
+    public void deleteComment(Long postId, Long id) {
+        Post post = getPost(postId);
+        Comment comment = getComment(id);
+        checkCommentBelongToPost(comment, post);
+        commentRepository.deleteById(id);
+    }
+
     private CommentDto mapToDto(Comment comment){
         CommentDto commentDto = new CommentDto();
         commentDto.setId(comment.getId());
