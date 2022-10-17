@@ -6,6 +6,7 @@ import com.example.springbootblogrestapi.payload.PostDto;
 import com.example.springbootblogrestapi.payload.PostResponse;
 import com.example.springbootblogrestapi.repositories.PostRepository;
 import com.example.springbootblogrestapi.services.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
+
+    private ModelMapper mapper;
 
     @Override
     public PostDto createPost(PostDto postDto) {
