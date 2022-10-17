@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    CommentRepository commentRepository;
-    PostRepository postRepository;
+    private CommentRepository commentRepository;
+    private PostRepository postRepository;
 
     private ModelMapper mapper;
 
