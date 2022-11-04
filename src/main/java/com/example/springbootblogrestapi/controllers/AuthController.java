@@ -1,5 +1,6 @@
 package com.example.springbootblogrestapi.controllers;
 
+import com.example.springbootblogrestapi.entities.Role;
 import com.example.springbootblogrestapi.entities.User;
 import com.example.springbootblogrestapi.payload.LoginDto;
 import com.example.springbootblogrestapi.payload.SignUpDto;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth/")
@@ -56,5 +59,16 @@ public class AuthController {
         }
 
         // create user
+        User user = new User();
+        user.setName(signUpDto.getName());
+        user.setUsername(signUpDto.getUsername());
+        user.setEmail(signUpDto.getEmail());
+        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
+
+        Role role = roleRepository.findByName("ROLE_ADMIN").get();
+        user.setRoles(Collections.singleton(role));
+
+        userRepository.save(user);
+        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
     }
 }
